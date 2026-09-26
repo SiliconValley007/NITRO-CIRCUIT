@@ -10,14 +10,14 @@ Open `index.html` in a modern browser, or host the repo on GitHub Pages.
 
 ### Desktop
 
-| Action | Keys |
-| --- | --- |
-| Accelerate | `W` / Arrow Up |
-| Brake / reverse | `S` / Arrow Down |
-| Steer | `A` `D` / Arrow Left Right |
-| Handbrake / drift | `Space` |
-| Nitro | `Shift` |
-| Pause | `Esc` / `P` |
+| Action            | Keys                       |
+| ----------------- | -------------------------- |
+| Accelerate        | `W` / Arrow Up             |
+| Brake / reverse   | `S` / Arrow Down           |
+| Steer             | `A` `D` / Arrow Left Right |
+| Handbrake / drift | `Space`                    |
+| Nitro             | `Shift`                    |
+| Pause             | `Esc` / `P`                |
 
 ### Mobile / touch
 
@@ -58,14 +58,6 @@ On-screen HUD: analog steer stick (bottom-left), GAS, BRAKE, DRIFT, NITRO (botto
 - **Smarter recovery direction** — when the AI needs to back out of a mistake, it now turns the way it was already trying to (based on its last steering command) instead of a 50/50 random guess, so the visible reverse-and-recover moment is shorter and more decisive.
 - **No-reverse / no-progress hardening** — the AI's own path-following logic can no longer command actual reverse at low speed (a prior loophole let a sharp turn + low speed trap it in a worsening backward spiral that a speed-only watchdog couldn't detect). A new direction-aware watchdog tracks real track progress and forces recovery within ~1.4s of any stall, reverse, or collision-spin, regardless of raw speed. Verified with a headless 3-lap physics simulation including deliberate player-AI collisions and a forced hard-reverse injection.
 
-## Deployment (GitHub Pages)
-
-1. Create a GitHub repository and push this project (keep `index.html` at the repo root).
-2. GitHub: **Settings → Pages**.
-3. Source: **Deploy from a branch**.
-4. Branch: `main` (or `master`), folder: `/ (root)`.
-5. Save. After a minute the game is live at `https://<user>.github.io/<repo>/`.
-
 Local preview:
 
 ```bash
@@ -82,12 +74,14 @@ Then open the printed local URL.
 - **Vanilla ES6** — game loop, HUD, input, pause
 - **Procedural canvas textures** — asphalt, curbs, building windows (no external images or models)
 
-Zero npm dependencies in the game itself. CDN scripts only.
+Zero npm dependencies. Libraries ship in `vendor/` (CDN fallback with SRI if local files are missing).
 
 ## Quality notes
 
-- Works on desktop and mobile, portrait and landscape
-- First interaction starts the race (title **RACE** button, or `Enter` / `W` / `Space`)
+- Desktop, laptop, tablet, phone, iPhone; portrait and landscape; iOS safe-area; visualViewport resize
+- Keyboard, on-screen touch pad, and gamepad (standard mapping)
+- First interaction starts the race (title **RACE** button, tap, click, or `Enter` / `W` / `Space`)
 - Best lap stored in `localStorage` key `nitrocircuit.best`
 - Physics verified headlessly with Cannon.js: 0-65 km/h in ~1 s, ~139 km/h top speed (163 km/h with nitro), zero roll during drifts
-- GitHub Pages ready: single `index.html`, no build step
+- GitHub Pages ready: root `index.html`, `.nojekyll`, `404.html`, no build step
+- Favicon, apple-touch-icon, web manifest, Open Graph tags, noscript fallback

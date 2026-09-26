@@ -17,6 +17,42 @@
       name="description"
       content="NITRO CIRCUIT - AAA arcade 3D car racing in the browser. Three.js + Cannon.js, zero assets."
     />
+    <meta name="apple-mobile-web-app-title" content="NITRO CIRCUIT" />
+    <meta name="application-name" content="NITRO CIRCUIT" />
+    <meta name="msapplication-TileColor" content="#05060f" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta property="og:title" content="NITRO CIRCUIT" />
+    <meta
+      property="og:description"
+      content="Night-city arcade racing in the browser. Procedural sports car, Cannon.js physics, drift nitro."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://siliconvalley007.github.io/NITRO-CIRCUIT/"
+    />
+    <meta
+      property="og:image"
+      content="https://siliconvalley007.github.io/NITRO-CIRCUIT/apple-touch-icon.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="NITRO CIRCUIT" />
+    <meta
+      name="twitter:description"
+      content="Night-city arcade racing in the browser. Procedural sports car, Cannon.js physics, drift nitro."
+    />
+    <meta
+      name="twitter:image"
+      content="https://siliconvalley007.github.io/NITRO-CIRCUIT/apple-touch-icon.png"
+    />
+    <link
+      rel="canonical"
+      href="https://siliconvalley007.github.io/NITRO-CIRCUIT/"
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <title>NITRO CIRCUIT</title>
     <style>
       :root {
@@ -39,6 +75,8 @@
       body {
         width: 100%;
         height: 100%;
+        height: 100svh;
+        height: 100dvh;
         overflow: hidden;
         background: var(--bg);
         color: var(--fg);
@@ -53,6 +91,8 @@
         overscroll-behavior: none;
         user-select: none;
         -webkit-user-select: none;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
       }
       canvas {
         display: block;
@@ -579,6 +619,108 @@
           font-size: 12px;
         }
       }
+      @media (max-width: 320px) {
+        .stat {
+          padding: 4px 6px;
+        }
+        .stat b {
+          font-size: 11px;
+        }
+        #btnPause {
+          width: 40px;
+          height: 40px;
+          flex-basis: 40px;
+        }
+        body.touch #stick {
+          width: 112px;
+          height: 112px;
+        }
+        .tbtn {
+          height: 48px;
+          min-width: 56px;
+          padding: 0 10px;
+          font-size: 10px;
+        }
+      }
+      @media (max-height: 520px) and (orientation: landscape) {
+        .stat {
+          min-width: 54px;
+          padding: 4px 8px;
+        }
+        .stat b {
+          font-size: 13px;
+        }
+        #btnPause {
+          width: 40px;
+          height: 40px;
+          flex-basis: 40px;
+        }
+        body.touch #minimap,
+        body.touch #speedo {
+          top: max(8px, env(safe-area-inset-top));
+        }
+        body.touch #minimap {
+          width: 72px;
+          height: 72px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        body.touch #speedo {
+          min-width: 110px;
+          padding: 6px 10px 8px;
+        }
+        body.touch #speedo .val {
+          font-size: 22px;
+        }
+        body.touch #stick {
+          width: 108px;
+          height: 108px;
+          bottom: max(8px, env(safe-area-inset-bottom));
+        }
+        #knob {
+          width: 44px;
+          height: 44px;
+          margin: -22px 0 0 -22px;
+        }
+        .tbtn {
+          height: 42px;
+          min-width: 58px;
+          font-size: 10px;
+        }
+        #pad {
+          bottom: max(8px, env(safe-area-inset-bottom));
+        }
+        .panel {
+          padding: 16px 18px;
+          max-height: 96vh;
+        }
+        .panel h1 {
+          letter-spacing: 4px;
+        }
+      }
+      @media (min-width: 1400px) {
+        .stat b {
+          font-size: 20px;
+        }
+        #speedo .val {
+          font-size: 54px;
+        }
+        #minimap {
+          width: 148px;
+          height: 148px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .panel {
+          animation: none;
+        }
+        #btnPause,
+        .menu button,
+        .tbtn,
+        #knob {
+          transition: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -635,12 +777,63 @@
     <div id="flash"></div>
     <div id="overlay"><div class="panel" id="panel"></div></div>
     <div id="load">LOADING CIRCUIT</div>
+    <noscript>
+      <div
+        style="
+          position: fixed;
+          inset: 0;
+          z-index: 50;
+          display: grid;
+          place-items: center;
+          background: #05060f;
+          color: #f8fafc;
+          font-family: system-ui, sans-serif;
+          padding: 24px;
+          text-align: center;
+        "
+      >
+        <div>
+          <h1 style="letter-spacing: 6px; margin: 0 0 12px">NITRO CIRCUIT</h1>
+          <p style="color: #94a3b8">JavaScript is required to race.</p>
+        </div>
+      </div>
+    </noscript>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+    <script src="vendor/three.min.js"></script>
+    <script src="vendor/cannon.min.js"></script>
+    <script>
+      if (typeof THREE === "undefined") {
+        document.write(
+          '<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"><\/script>',
+        );
+      }
+      if (typeof CANNON === "undefined") {
+        document.write(
+          '<script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js" integrity="sha384-I+vlbhtggPtDgOcGQ3rwhQl9JEO7qonTByw9baD7Vlc+1bJdn2ucktJAsbo3nmGA" crossorigin="anonymous"><\/script>',
+        );
+      }
+    </script>
     <script>
       (function () {
         "use strict";
+
+        function fatalEarly(title, msg) {
+          var l = document.getElementById("load");
+          if (l) l.classList.add("hidden");
+          var o = document.getElementById("overlay"),
+            p = document.getElementById("panel");
+          if (!o || !p) return;
+          p.innerHTML =
+            "<h2>" + title + '</h2><div class="sub">' + msg + "</div>";
+          o.classList.remove("hidden");
+        }
+        if (typeof THREE === "undefined" || typeof CANNON === "undefined") {
+          fatalEarly(
+            "UNAVAILABLE",
+            "Could not load Three.js / Cannon.js.<br>Check your network connection and reload.",
+          );
+          return;
+        }
 
         var TAU = Math.PI * 2,
           LAPS = 3,
@@ -668,15 +861,29 @@
           angDampY: 0.6,
         };
 
+        var coarsePtr = false;
+        try {
+          coarsePtr = window.matchMedia("(pointer: coarse)").matches;
+        } catch (e) {}
+        var hoverNone = false;
+        try {
+          hoverNone = window.matchMedia("(hover: none)").matches;
+        } catch (e) {}
         var lowPower =
-          (navigator.hardwareConcurrency || 4) <= 4 ||
+          (navigator.hardwareConcurrency || 8) <= 4 ||
+          (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+          ((coarsePtr || hoverNone) &&
+            (window.innerWidth < 900 || window.innerHeight < 700));
+        var touchCap =
+          coarsePtr ||
+          hoverNone ||
           "ontouchstart" in window ||
           (navigator.maxTouchPoints || 0) > 0;
-        var touchCap =
-          "ontouchstart" in window ||
-          (navigator.maxTouchPoints || 0) > 0 ||
-          window.matchMedia("(hover:none)").matches;
-        if (touchCap) document.body.classList.add("touch");
+        function applyTouchClass() {
+          if (touchCap) document.body.classList.add("touch");
+          else document.body.classList.remove("touch");
+        }
+        applyTouchClass();
 
         var $ = function (id) {
           return document.getElementById(id);
@@ -758,6 +965,7 @@
           sunSprite,
           mmBase;
 
+        var qualityDropped = false;
         var state = "menu",
           lap = 1,
           tLap = 0,
@@ -843,6 +1051,14 @@
           drift: 0,
           nitro: 0,
         };
+        var gpIn = {
+          gas: 0,
+          brake: 0,
+          steer: 0,
+          drift: 0,
+          nitro: 0,
+        };
+        var gpStartHeld = false;
 
         var fwd = new CANNON.Vec3(),
           rgt = new CANNON.Vec3(),
@@ -1900,8 +2116,8 @@
             "<h1>NITRO CIRCUIT</h1>" +
               '<div class="sub">Night-city arcade racing.<br>3 laps. Drift to refill nitro.<br>Beat your best lap.</div>' +
               '<div class="menu"><button id="mStart">RACE</button></div>' +
-              '<div class="sub" style="margin:14px 0 0;font-size:12px">Click or press <b>W</b> / <b>Enter</b> / <b>Space</b> to start</div>' +
-              '<div class="keys"><i>WASD / ARROWS</i><i>SHIFT NITRO</i><i>SPACE DRIFT</i><i>ESC PAUSE</i></div>',
+              '<div class="sub" style="margin:14px 0 0;font-size:12px">Tap <b>RACE</b>, click, or press <b>W</b> / <b>Enter</b> / <b>Space</b></div>' +
+              '<div class="keys"><i>WASD / ARROWS</i><i>SHIFT NITRO</i><i>SPACE DRIFT</i><i>ESC PAUSE</i><i>TOUCH PAD</i></div>',
           );
         }
 
@@ -1986,18 +2202,66 @@
           return m + ":" + (s < 10 ? "0" : "") + s.toFixed(2);
         }
 
+        function pollGamepad() {
+          gpIn.gas = gpIn.brake = gpIn.steer = gpIn.drift = gpIn.nitro = 0;
+          if (!navigator.getGamepads) return;
+          var list;
+          try {
+            list = navigator.getGamepads();
+          } catch (e) {
+            return;
+          }
+          if (!list) return;
+          var g = null;
+          for (var i = 0; i < list.length; i++) {
+            if (list[i]) {
+              g = list[i];
+              break;
+            }
+          }
+          if (!g) {
+            gpStartHeld = false;
+            return;
+          }
+          var ax = g.axes && g.axes.length ? g.axes[0] : 0;
+          if (Math.abs(ax) > 0.18) gpIn.steer = -ax;
+          var bt = g.buttons || [];
+          function pressed(idx) {
+            var b = bt[idx];
+            if (!b) return false;
+            return b.pressed || b.value > 0.45;
+          }
+          if (pressed(7) || pressed(5) || pressed(12)) gpIn.gas = 1;
+          if (pressed(6) || pressed(4) || pressed(13)) gpIn.brake = 1;
+          if (pressed(0) || pressed(2)) gpIn.nitro = 1;
+          if (pressed(1) || pressed(10)) gpIn.drift = 1;
+          var start = pressed(9) || pressed(8);
+          if (start && !gpStartHeld) {
+            if (state === "playing") pauseGame();
+            else if (state === "paused") resumeGame();
+            else if (state === "menu" || state === "over") startRace();
+          }
+          gpStartHeld = start;
+        }
+
         function readInput() {
-          var gas = keys.KeyW || keys.ArrowUp || pad.gas ? 1 : 0;
-          var brake = keys.KeyS || keys.ArrowDown || pad.brake ? 1 : 0;
+          pollGamepad();
+          var gas = keys.KeyW || keys.ArrowUp || pad.gas || gpIn.gas ? 1 : 0;
+          var brake =
+            keys.KeyS || keys.ArrowDown || pad.brake || gpIn.brake ? 1 : 0;
           var steer =
             (keys.KeyA || keys.ArrowLeft ? 1 : 0) -
             (keys.KeyD || keys.ArrowRight ? 1 : 0);
-          if (steer === 0) steer = pad.steerAxis + pad.left - pad.right;
+          if (steer === 0)
+            steer = pad.steerAxis + pad.left - pad.right + gpIn.steer;
           lenSteer = clamp(steer, -1, 1);
           gasIn = gas;
           brakeIn = brake;
-          hbIn = keys.Space || pad.drift ? 1 : 0;
-          nitroIn = keys.ShiftLeft || keys.ShiftRight || pad.nitro ? 1 : 0;
+          hbIn = keys.Space || pad.drift || gpIn.drift ? 1 : 0;
+          nitroIn =
+            keys.ShiftLeft || keys.ShiftRight || pad.nitro || gpIn.nitro
+              ? 1
+              : 0;
         }
         var lenSteer = 0,
           gasIn = 0,
@@ -2714,10 +2978,24 @@
         }
 
         function onResize() {
-          var w = document.documentElement.clientWidth || window.innerWidth,
-            h = document.documentElement.clientHeight || window.innerHeight;
+          var w = Math.max(
+              1,
+              document.documentElement.clientWidth || window.innerWidth || 1,
+            ),
+            h = Math.max(
+              1,
+              document.documentElement.clientHeight || window.innerHeight || 1,
+            );
+          if (window.visualViewport) {
+            w = Math.max(1, Math.round(window.visualViewport.width));
+            h = Math.max(1, Math.round(window.visualViewport.height));
+          }
+          if (!renderer || !camera) return;
           renderer.setPixelRatio(
-            Math.min(window.devicePixelRatio || 1, lowPower ? 1.5 : 2),
+            Math.min(
+              window.devicePixelRatio || 1,
+              qualityDropped ? 1 : lowPower ? 1.25 : 2,
+            ),
           );
           renderer.setSize(w, h, false);
           camera.aspect = w / h;
@@ -2871,6 +3149,7 @@
               return;
             }
             if (state !== "playing") return;
+            if (touchCap) return;
             if (active !== -1) return;
             active = e.pointerId;
             sx = e.clientX;
@@ -2910,7 +3189,22 @@
           window.addEventListener("resize", onResize);
           window.addEventListener("orientationchange", function () {
             setTimeout(onResize, 140);
+            setTimeout(onResize, 420);
           });
+          if (window.visualViewport) {
+            window.visualViewport.addEventListener("resize", onResize);
+            window.visualViewport.addEventListener("scroll", onResize);
+          }
+          window.addEventListener("pageshow", function () {
+            onResize();
+          });
+          document.addEventListener(
+            "touchmove",
+            function (e) {
+              if (e.cancelable) e.preventDefault();
+            },
+            { passive: false },
+          );
           window.addEventListener("blur", function () {
             clearInputs();
             if (state === "playing") {
@@ -2971,6 +3265,7 @@
             drawMinimap();
             audioUpdate();
           } else if (state === "menu") {
+            pollGamepad();
             camYaw += dt * 0.12;
             var p = cP(0.006);
             camera.position.x = p.x - Math.sin(camYaw) * 16;
@@ -2991,6 +3286,7 @@
               chassis.quaternion.w,
             );
           } else if (state === "paused" || state === "over") {
+            pollGamepad();
             updateHUD();
             drawMinimap();
           }
@@ -3010,7 +3306,6 @@
           }
         }
 
-        var qualityDropped = false;
         function adaptQuality() {
           qualityDropped = true;
           try {

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>NITRO CIRCUIT</title>
+    <script>
+      (function () {
+        var path = location.pathname || "/";
+        var i = path.toLowerCase().indexOf("/nitro-circuit");
+        var root = i >= 0 ? path.slice(0, i + "/NITRO-CIRCUIT".length) : "/";
+        if (root.charAt(root.length - 1) !== "/") root += "/";
+        location.replace(root);
+      })();
+    </script>
+    <meta http-equiv="refresh" content="0; url=./" />
+  </head>
+  <body>
+    <p><a href="./">NITRO CIRCUIT</a></p>
+  </body>
+</html>

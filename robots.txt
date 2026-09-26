@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://siliconvalley007.github.io/NITRO-CIRCUIT/sitemap.xml
